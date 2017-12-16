@@ -1,12 +1,15 @@
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.List;
 
 public class Main {
 
     public static List<String> result;
     public static List<String> result2;
     public static int count;
+    public static String str;
 
     public static void main(String[] args) throws FileNotFoundException {
 
@@ -23,20 +26,31 @@ public class Main {
 
         List<Integer> list = new ArrayList<>();
 
+
         for (int i = 0; i < arr.length; i++) {
             list.add(Integer.parseInt(arr[i]));
         }
 
+
+/*
+        list.add(0);
+        list.add(2);
+        list.add(7);
+        list.add(0);
+        */
+
+
         result = new ArrayList<>();
         result2 = new ArrayList<>();
         count = 0;
+        str = "";
 
         //partOne(list);
-
         partTwo(list);
     }
 
     public static void partOne(List<Integer> list) {
+        boolean doesContain = false;
         int max;
         int originalMax;
         int val;
@@ -64,7 +78,7 @@ public class Main {
 
                 if (max == 0) {
                     str = listCopy.toString();
-                    boolean doesContain = result.contains(str);
+                    doesContain = result.contains(str);
 
                     if (!doesContain) {
                         partOne(listCopy);
@@ -84,20 +98,16 @@ public class Main {
 
 
     public static void partTwo(List<Integer> list) {
-
-        System.out.println("part 2");
-
+        boolean doesContain = false;
         int max;
         int originalMax;
         int val;
         int index;
         int newVal;
-
         String str;
 
         List<Integer> listCopy = new ArrayList<>(list);
-
-        result.add(listCopy.toString());
+        result2.add(listCopy.toString());
 
         max = Collections.max(list) + 1;
         originalMax = max;
@@ -116,20 +126,17 @@ public class Main {
 
                 if (max == 0) {
                     str = listCopy.toString();
-                    boolean doesContain = result.contains(str);
+                    doesContain = result2.contains(str);
 
                     if (!doesContain) {
                         partTwo(listCopy);
                     } else {
-                        count++;
+                        int start = result2.indexOf(str);
+                        int end = result2.size();
+                        int diff = end - start;
 
-                        if (count == 2) {
-                            System.out.println("Part 2: " + count);
-                            break;
-                        } else {
-                            partTwo(listCopy);
-                        }
-
+                        System.out.println("Part 2: " + diff);
+                        break;
                     }
                 }
             }
@@ -140,7 +147,6 @@ public class Main {
             }
         }
     }
-
 
 }
 
