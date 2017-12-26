@@ -1,7 +1,4 @@
-import com.sun.xml.internal.messaging.saaj.soap.FastInfosetDataContentHandler;
 
-import javax.sound.midi.SysexMessage;
-import javax.swing.tree.TreeNode;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
@@ -19,7 +16,7 @@ public class Main {
 
         path = new ArrayList<>();
 
-        Scanner sc = new Scanner(new File("src/test_input"));
+        Scanner sc = new Scanner(new File("src/input"));
         List<String> lines = new ArrayList<String>();
         while (sc.hasNextLine()) {
             lines.add(sc.nextLine());
@@ -61,10 +58,6 @@ public class Main {
         List<Integer> weightList = new ArrayList<>();
         List<String> programsList = new ArrayList<>();
 
-
-        String rootPath = "";
-
-
         // set weightList and programsList
         for (int m = 0; m < arr.length; m++) {
             String program = arr[m];
@@ -75,7 +68,7 @@ public class Main {
             weightList.add(weight);
         }
 
-        List<String> rootChildren = getChildren(root);
+        List<String> rootChildren = getChildren("hmgrlpj");
         List<Integer> sumList = new ArrayList<>();
         List<Integer> tempWeights = new ArrayList<>();
 
@@ -90,13 +83,17 @@ public class Main {
                 for (String b : breakdown) {
                     int index = programsList.indexOf(b);
                     int weight = weightList.get(index);
+                    System.out.println(b + " -> " + weight);
                     tempWeights.add(weight);
                     sum += weight;
                 }
             }
+            System.out.println("---");
+            System.out.println("sum: " + sum);
+            System.out.println("---");
+
             sumList.add(sum);
             int iSum = sumList.indexOf(sum);
-
 
             if (iSum != 0) {
                 int prevSum = sumList.get(iSum - 1);
